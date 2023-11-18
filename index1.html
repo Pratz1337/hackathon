@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Itinerary Planner</title>
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="icon" type="image/png" href-="https://tripplanner.ai/tripplanner-logo-blue.png">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="javascript" href="script.js" type="text/javascript">
+
+
+    
+</head>
+<body>
+<h1>Travel Itinerary Planner</h1>
+<form id="itineraryForm">
+    <label for="destination">Destination:</label>
+    <input type="text" id="destination" name="destination" required>
+
+    <label for="activity">Activity:</label>
+    <input type="text" id="activity" name="activity" required>
+
+    <label for="start_date">Start Date:</label>
+    <input type="date" id="start_date" name="start_date" required>
+
+    <label for="end_date">End Date:</label>
+    <input type="date" id="end_date" name="end_date" required>
+
+    <label for="budget">Budget:</label>
+    $<input type="number" id="budget" name="budget" required>
+
+    <label for="transportation">Transportation:</label>
+    <select id="transportation" name="transportation">
+        <option value="flight">Flight</option>
+        <option value="train">Train</option>
+        <option value="car">Car</option>
+    </select>
+
+    <label for="accommodation">Accommodation:</label>
+    <select id="accommodation" name="accommodation">
+        <option value="hotel">Hotel</option>
+        <option value="hostel">Hostel</option>
+        <option value="airbnb">Airbnb</option>
+    </select>
+
+    <label for="dining">Dining:</label>
+    <select id="dining" name="dining">
+        <option value="restaurant">Restaurant</option>
+        <option value="cafe">Cafe</option>
+        <option value="street_food">Street Food</option>
+    </select>
+
+    <label for="attractions">Attractions:</label>
+    <textarea id="attractions" name="attractions"></textarea>
+
+    <button type="button" id="generateItineraryBtn">Generate Itinerary</button>
+</form>
+
+<div id="weather"></div>
+
+<script>
+    $(document).ready(function () {
+        // Enable autocomplete on the destination input field
+        $('#destination').autocomplete({
+            source: function(request, response) {
+                // For simplicity, using a static list. Replace with actual API call.
+                var destinations = ['New York', 'Paris', 'Tokyo', 'London', 'Rome'];
+                var results = $.ui.autocomplete.filter(destinations, request.term);
+                response(results.slice(0, 5));
+            },
+            minLength: 2
+        });
+
+        // Your existing script for generating itinerary and weather goes here
+        // ...
+    });
+    $(document).ready(function() {
+    // Enable autocomplete on the destination input field
+    $('#destination').autocomplete({
+        source: function(request, response) {
+            // Call the API or use a predefined list to get destination suggestions
+            // For simplicity, I'm using a static list here. You can replace it with an API call.
+            var destinations = ['New York', 'Paris', 'Tokyo', 'London', 'Rome'];
+            var results = $.ui.autocomplete.filter(destinations, request.term);
+
+            response(results.slice(0, 5)); // Display up to 5 suggestions
+        },
+        minLength: 2 // Minimum characters before triggering autocomplete
+    });
+});
+
+        $(document).ready(function () {
+            $('#generateItineraryBtn').on('click', function () {
+                generateItinerary();
+            });
+            
+            $('form').submit(function(e) {
+                e.preventDefault();
+                const destination = $('#destination').val();
+                const start_date = $('#start_date').val();
+                const end_date = $('#end_date').val();
+                
+                // Call weather API with destination and dates to get forecast
+                
+                // Display weather forecast in the 'weather' div
+                $('#weather').text('Weather forecast for ' + destination + ' from ' + start_date + ' to ' + end_date);
+            });
+        });
+        </script>
+
+
+</body>
+</html>
