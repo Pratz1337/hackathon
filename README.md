@@ -1,2 +1,0 @@
-# hackathon
-travel planner itineary
